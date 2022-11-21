@@ -1,0 +1,88 @@
+﻿@model YOUTUBE.Models.innerjoin
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+
+    .title {
+        color: grey;
+        font-size: 18px;
+    }
+
+    .but {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+        button:hover, a:hover {
+            opacity: 0.7;
+        }
+
+    .profile_1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+    }
+
+    .label_profile {
+        margin-right: 12px;
+        background-color: gray;
+        color: white;
+        font-size: 20px;
+    }
+</style>
+<h2 style="text-align:center">User Profile</h2>
+
+<div class="card">
+    <img src="@Model.user.imageuser" alt="John" style="width:100%;border-radius: 50%;">
+
+    <h1>@Model.accountt.username</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <div class="all">
+        <div class="profile_1">
+            <label class="label_profile">Họ tên:</label>
+            <h3>@Model.user.hoten</h3>
+        </div>
+        <div class="profile_1">
+            <label class="label_profile">Email:</label>
+            <h3>@Model.user.email</h3>
+        </div>
+        <div class="profile_1">
+            <label class="label_profile">địa chỉ:</label>
+            <h3>@Model.user.diachi</h3>
+        </div>
+        <div class="profile_1">
+            <label class="label_profile">SDT:</label>
+            <h3>@Model.user.SDT</h3>
+        </div>
+    </div>
+
+
+    <p><a href="/MyProfile/Edit" class="but">Edit MyProfile</a></p>
+</div>
+
+

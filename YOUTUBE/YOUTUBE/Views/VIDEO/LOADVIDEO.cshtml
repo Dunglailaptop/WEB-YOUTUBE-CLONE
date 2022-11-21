@@ -1,0 +1,59 @@
+﻿@model IEnumerable<YOUTUBE.Models.innerjoin>
+
+@{
+    ViewBag.Title = "LOADVIDEO";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<div class="banners">
+    <style>
+        .category {
+            margin: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .btn-category {
+            width: 100px;
+            height: 50px;
+            border-radius: 7%;
+        }
+        .btn-category:hover{
+            background-color:gray;
+        }
+        .img-title{
+            height:200px;
+            border:1px solid black;
+        }
+    </style>
+    <div class="category">
+        <label>Danh mục:</label>
+       
+        @foreach (var it in Session["danhmuc"] as List<YOUTUBE.Models.danhmuc>)
+    {
+    using (@Html.BeginForm("timkiemtheodanhmuc", "DanhMuc", FormMethod.Post))
+    {
+        <input name="iddm" value="@it.MaDM" hidden />
+        <button class="btn-category">@it.tendm</button>
+    }
+
+    }
+
+</div>
+    <img class="img-title" src="/Content/img/baocao.png">
+</div>
+<div class="list-container">
+    @foreach (var item in Model)
+    {
+       
+        <div class="vid-list">
+            <a href="/VIDEO/Detail?mv=@item.videoo.Mavideo&id=@item.videoo.categoryid"><img src="@item.videoo.imagetitle" class="thumbnail"></a>
+            <div class="flex-div">
+                <img src="@item.user.imageuser">
+                <div class="vid-info">
+                    <a href="play-video.html">@item.videoo.nametitle</a>
+                    <p>@item.accountt.username</p>
+                    <p>15k lượt xem &bull; 8 ngày trước</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

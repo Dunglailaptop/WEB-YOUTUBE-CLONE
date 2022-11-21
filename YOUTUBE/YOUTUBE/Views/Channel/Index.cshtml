@@ -1,0 +1,54 @@
+﻿@model YOUTUBE.Models.channel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<style>
+    .video {
+        align-items: center;
+        margin-top: -10px;
+    }
+</style>
+<div class="profilebanner">
+    <img style="height:300px;" src="@Model.images">
+</div>
+<div class="mychannel">
+    <img src="@Session["imageusers"]">
+    <div>
+        <h3>Nguyễn Xuân Tiến Dũng</h3>
+        <span>10.252 Người đăng kí</span>
+    </div>
+    <form action="/Channel/dangkykenh" method="post">
+        <input hidden name="matkk" type="text" value="@Model.matk" />
+        <input hidden name="makenh" type="text" value="@Model.MaDK"/>
+        <button type="submit">Đăng kí</button>
+    </form>
+   
+    <button type="button">Tham gia</button>
+</div>
+<hr>
+<div class="list">
+    <h2>Danh sách phát:</h2>
+</div>
+@foreach (var it in Session["listvideochannel"] as List<YOUTUBE.Models.innerjoin>)
+{
+    <div class="video">
+        <a href="" class="smallthumbnail"><img src="@it.videoo.imagetitle"></a>
+        <div class="video-info">
+            <h3>@it.videoo.nametitle</h3>
+            <p>@it.accountt.username</p>
+            <p>155.235 lượt xem &bull; 2 tuần trước</p>
+            <p>@it.videoo.noidung</p>
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+

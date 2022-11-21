@@ -1,0 +1,162 @@
+﻿<nav class="flex-div">
+    <div class="nav-left flex-div">
+        @if (Session["idadmin"] != null)
+        {
+            <label for="checkad">
+                <img src="/Content/img/menu.png" class="menu-icon">
+            </label>
+
+        }
+
+        <label style="font-size:50px;">WEBVIDEO</label>
+    </div>
+
+    <div class="nav-middle flex-div">
+        <form action="/timkiem/timkiem" method="post">
+            <div class="search-box flex-div">
+                <input type="text" name="n" placeholder="Search">
+
+                <button type="submit"><img src="/Content/img/search.png"></button>
+            </div>
+        </form>
+
+
+
+
+    </div>
+
+    <div class="nav-right flex-div">
+        <a href="/quayvideomanhinh/Index"><img src="/Content/img/upload.png"></a>
+        @*<img src="/Content/img/more.png">*@
+        <label for="check">
+            <img src="/Content/img/notification.png">
+        </label>
+        <input hidden type="checkbox" id="check">
+
+        <style>
+            .dropdown-content {
+                background-color: #fff;
+                margin: 0;
+                display: none;
+                min-width: 100px;
+                overflow-y: auto;
+                opacity: 0;
+                position: absolute;
+                z-index: 999;
+                -webkit-transform-origin: 0 0;
+                transform-origin: 0 0;
+            }
+
+            #check:checked ~ .dropdown-content {
+                display: block;
+                opacity: 1;
+                margin-right: 100px;
+                margin-top: 300px;
+                margin-left: -50px;
+                border: 1px solid;
+                min-height: 250px;
+                max-width: 200px;
+                max-height: 200px;
+                min-width: 200px;
+            }
+
+            .img-thongbao {
+                border-radius: 50%;
+            }
+
+            .label-thongbao {
+                margin-left: -20px;
+                font-weight: bold;
+            }
+
+            .li-thongbao:hover {
+                background-color: gray;
+            }
+        </style>
+
+        <!-- Dropdown Trigger -->
+        <!-- Dropdown Structure -->
+        <div id='dropdown-menu' class='dropdown-content'>
+            <ul>
+                @foreach (var it in Session["thongbao"] as List<YOUTUBE.Models.innerjoin>)
+                {
+                    <li class="li-thongbao"><a href="/Channel/kenhnguoidung?id=@it.accountt.matk"><img class="img-thongbao" src="@it.user.imageuser" /><label class="label-thongbao">@it.accountt.username</label> @it.thongbaos.noidung <label>@it.thongbaos.thoigian</label></a></li>
+                }
+
+
+                <li class="divider" tabindex="-1"></li>
+
+
+            </ul>
+        </div>
+
+        @if (Session["acc"] == null)
+        {
+            <a href="/Account/logins">Đăng nhập</a>
+        }
+        else if (Session["acc"] != null)
+        {
+            <a href="/MyProfile/Detail"><img src="@Session["imageusers"]" class="user-icon"></a>
+        }
+    </div>
+</nav>
+<style>
+    .menu {
+      display:none;
+    }
+    #checkad:checked ~ .menu-admin {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        background-color: gray;
+        background-color: rgba(0,0,0,0.3);
+    }
+    #checkad:checked ~ .menu {
+        display:block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 100%;
+        z-index: 10;
+        background-color: white;
+    }
+    .lili {
+        margin: 24px;
+        text-align: center;
+        height: 50px;
+        border: 1px solid black;
+        list-style: none;
+        display: flex;
+        align-items: center;
+     
+    }
+    .lili:hover
+    {
+        background-color:gray;
+    }
+    .title-menu
+    {
+        text-align:center;
+    }
+</style>
+<input type="checkbox" id="checkad" />
+
+    <label for="checkad" class="menu-admin"></label>
+<div class="menu">
+    <h1 class="title-menu">Admins</h1>
+    <hr />
+    <ul>
+        <a href="/DanhMuc/danhsachdanhmuc">
+        <li class="lili"><img src="/Content/img/more.png" />Quản lý danh mục</li>
+        </a>
+        <a href="/Account/Index">
+        <li class="lili"><img src="/Content/img/more.png" />Quản lý tài khoản</li>
+        </a>
+        <li class="lili"><img src="/Content/img/more.png" />Duyệt bài đăng</li>
+    </ul>
+</div>

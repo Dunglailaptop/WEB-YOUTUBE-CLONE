@@ -1,0 +1,45 @@
+﻿@model YOUTUBE.Models.detailtaikhoanResult
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>detailtaikhoanResult</h4>
+    <hr />
+   
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.matk)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.matk)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.passwords)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.passwords)
+            </dd>
+
+        </dl>
+    
+</div>
+<p>
+    <a href="/Account/Delete?id=@Html.DisplayFor(model=>model.matk)">Delete</a>
+    @Html.ActionLink("Back to List", "Index","Account")
+</p>

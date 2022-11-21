@@ -1,0 +1,54 @@
+﻿@model IEnumerable<YOUTUBE.Models.danhmuc>
+
+@{
+    ViewBag.Title = "danhsachdanhmuc";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2>Quản lý danh mục</h2>
+<style>
+    th {
+        padding: 24PX;
+        border: 1px solid;
+        background-color: green;
+    }
+
+    td {
+        padding: 24px;
+    }
+  
+</style>
+<p class="taomoi">
+    @Html.ActionLink("Tạo mới", "create","DanhMuc")
+</p>
+<table class="table">
+    <tr>
+        <th>
+          Tên Danh mục
+        </th>
+        <th>
+           Mã Quản lý
+        </th>
+        <th>
+            EDIT
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tendm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaQL)
+        </td>
+        <td>
+
+
+            @Html.ActionLink("edit", "edit", new { id = item.MaDM })|
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.MaDM })*@
+        </td>
+    </tr>
+}
+
+</table>

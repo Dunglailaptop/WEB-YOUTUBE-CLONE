@@ -1,0 +1,37 @@
+﻿<div class="sidebar">
+    <div class="shortcut-links">
+        <a href="/VIDEO/LOADVIDEO"><img src="/Content/img/home.png"><p>Trang Chủ</p></a>
+
+        @if (Session["kenh"] != null)
+        {
+            <a href="/Channel/Index"><img src="/Content/img/subscriprion.png"><p>Kênh của bạn</p></a>
+        }
+        else if (Session["kenh"] == null)
+        {
+            <a href="/Channel/taokenh"><img src="/Content/img/subscriprion.png"><p>Tạo kênh</p></a>
+        }
+        @*<a href=""><img src="/Content/img/playlist.png"><p>Videolist</p></a>*@
+        <a href="/LastVideo/showlastvideo"><img src="/Content/img/history.png"><p>LastVideo</p></a>
+        <a href="/VIDEO/create"><img src="/Content/img/playlist.png"><p>MyVideo</p></a>
+        <a href="/Account/dangxuat"><img src="/Content/img/show-more.png"><p>Đăng xuất</p></a>
+        <hr>
+    </div>
+    <style>
+        a.the-a {
+            flex-wrap: nowrap;
+        }
+    </style>
+    @if (Session["acc"] != null)
+    {
+        <div class="subscribed-list">
+            <h3>Người đăng kí</h3>
+            @foreach (var i in Session["dskenhdy"] as List<YOUTUBE.Models.innerjoin>)
+            {
+                <a class="the-a" href=""><img src="@i.user.imageuser"><p>@i.accountt.username</p></a>
+
+            }
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,56 @@
+﻿@model YOUTUBE.Models.channel
+
+@{
+    ViewBag.Title = "taokenh";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2>taokenh</h2>
+<style>
+    .container {
+        width: 500px;
+        margin: auto;
+        /* margin: 200px; */
+        margin-top: 50px;
+        background-color: gray;
+    }
+</style>
+@using (Html.BeginForm("taokenh","Channel",FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+    
+       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.tenkenh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tenkenh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tenkenh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.images, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label>anh kenh</label>
+             <input type="file" name="file"/>
+            </div>
+        </div>
+
+       <input type="text" name="matk" value="@Session["acc"]"/>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

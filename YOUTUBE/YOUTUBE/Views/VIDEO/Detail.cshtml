@@ -1,0 +1,124 @@
+﻿@model IEnumerable<YOUTUBE.Models.innerjoin>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+    
+    @*@foreach(var item in Model) {*@ 
+    <div class="container play-container">
+        <div class="row">
+            <div class="play-video">
+                <video controls autoplay>
+                    <source src="@Session["filevideo"]" type="video/mp4">
+                </video>
+
+                <div class="tags">
+                    
+                </div>
+                <h3>@Session["namevideo"]</h3>
+                <div class="play-video-info">
+                    @using (Html.BeginForm("Index", "LastVideo",FormMethod.Post))
+                    {
+                        <div>
+                            <input hidden name="mavideo" value="@Session["mavideo"]" />
+                            <button type="submit"><img src="/Content/img/save.png" /> Save </button>
+
+                        </div>
+
+                    }
+                <label style="color:red;">@TempData["daluu"]</label>
+
+
+                </div>
+                <hr>
+                <div class="publisher">
+                    <img src="@Session["imageuser"]">
+                    <div>
+                        <p>@Session["nameuser"]</p>
+                        <span>10.252 Người đăng kí</span>
+                    </div>
+                    <form action="/Channel/dangkykenh" method="post">
+                        <input hidden name="makenh" type="text" value="@Session["makenh"]" />
+                        <input hidden name="matk" type="text" value="@Session["iduser"]" />
+                        <input hidden name="matkuser" type="text" value="@Session["acc"]" />
+                        @if (Session["dangky"] != null)
+                        {
+                            <button type="submit">Đăng kí</button>
+                        }
+                        @if (Session["kenhchuatao"] != null)
+                        {
+                            <label style="color:red;">Kênh chưa được tạo</label>
+                        }
+                        @if(Session["dadangky"]!=null)
+                        {
+                         <button disabled type="submit" style="background-color:gray"> Đã đăng kí</button>
+                            }
+                    </form>
+                    <label style="color:red;">@ViewBag.Message</label>
+                </div>
+
+                <div class="vid-description">
+                    <p></p>
+
+                    <hr>
+                    <form action="/binhLuan/Index" method="post">
+                        <div class="add-comment">
+                            <img src="@Session["imageusers"]">
+                            <input type="text" name="noidung" placeholder="Thêm bình luận của bạn vào đây...">
+                            <input type="submit" />
+                        </div>
+                    </form>
+
+                    @foreach (var it in TempData["binhluan"] as List<YOUTUBE.Models.innerjoin>)
+                    {
+                        <div class="old-comment">
+                            <img src="@it.user.imageuser">
+                            <div>
+
+                                <p>@it.commentt.noidung</p>
+
+                            </div>
+                        </div>
+                    }
+
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+            @*}*@
+            <div class="right-sidebar">
+
+
+                @foreach (var item2 in Model)
+                {
+                    <div class="side-video-list">
+                        <a href="" class="small-thumbnail"><img src="@item2.videoo.imagetitle"></a>
+                        <div class="vid-info">
+                            <a href=""> @item2.videoo.nametitle</a>
+                            <p>@item2.accountt.username</p>
+                            <p>15k lượt xem</p>
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<YOUTUBE.Models.laytkResult>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2>QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
+<style>
+    th{
+        padding:24PX;
+            border:1px solid;
+           background-color:green;
+    }
+    td{
+        padding:24px;
+    }
+</style>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.matk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.passwords)
+        </th>
+        <th>
+            EDIT
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.matk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.passwords)
+        </td>
+        <td>
+            <a href="/Account/khoaacc?id=@item.matk">Khóa tài khoản</a>
+            @*@Html.ActionLink("Phân quyền", "","Account", new { /* id=item.PrimaryKey */ }) |*@
+           
+        </td>
+    </tr>
+}
+
+</table>

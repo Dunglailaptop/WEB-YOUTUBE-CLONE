@@ -1,0 +1,44 @@
+﻿@model YOUTUBE.Models.danhmuc
+
+@{
+    ViewBag.Title = "edit";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<style>
+</style>
+@using (Html.BeginForm("edit", "DanhMuc", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>danhmuc</h4>
+        <hr />
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        <div class="form-group">
+            <label style="display:flex;
+justify-content:center;">Tên Danh Mục</label>
+            <div style="display:flex;
+justify-content:center;" class="col-md-10">
+              <input type="text" name="tendm" value="@Model.tendm" />
+            </div>
+        </div>
+
+        <div  class="form-group">
+            <label hidden>Mã danh muc</label>
+            <div hidden class="col-md-10">
+               <input type="text" name="madm" value="@Model.MaDM" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input style=" width: 100px; height: 50px; background-color: green; color: white;" type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "danhsachdanhmuc", "DanhMuc")
+</div>

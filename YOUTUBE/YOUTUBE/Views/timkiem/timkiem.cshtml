@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "timkiem";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="banners">
+    <img src="/Content/img/ytbbanner.jpg">
+</div>
+<div class="list-container">
+    @foreach (var item in Model)
+    {
+
+        <div class="vid-list">
+            <a href="/VIDEO/Detail?mv=@item.videoo.Mavideo&id=@item.videoo.categoryid"><img src="@item.videoo.imagetitle" class="thumbnail"></a>
+            <div class="flex-div">
+                <img src="@item.user.imageuser">
+                <div class="vid-info">
+                    <a href="play-video.html">@item.videoo.nametitle</a>
+                    <p>@item.accountt.username</p>
+                    <p>15k lượt xem &bull; 8 ngày trước</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

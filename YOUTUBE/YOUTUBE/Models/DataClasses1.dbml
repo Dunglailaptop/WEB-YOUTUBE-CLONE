@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="webvideo" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-SBN18PPA\SQLEXPRESS;Initial Catalog=webvideo;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="webvideoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.account" Member="accounts">
+    <Type Name="account">
+      <Column Name="matk" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="passwords" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="account_channel" Member="channels" ThisKey="matk" OtherKey="matk" Type="channel" />
+      <Association Name="account_comment" Member="comments" ThisKey="matk" OtherKey="matk" Type="comment" />
+      <Association Name="account_User" Member="Users" ThisKey="matk" OtherKey="matk" Type="User" />
+      <Association Name="account_video" Member="videos" ThisKey="matk" OtherKey="matk" Type="video" />
+      <Association Name="account_dangkykenh" Member="dangkykenhs" ThisKey="matk" OtherKey="matk" Type="dangkykenh" />
+      <Association Name="account_dangkykenh1" Member="dangkykenhs1" ThisKey="matk" OtherKey="matkuser" Type="dangkykenh" />
+      <Association Name="account_lastvideo" Member="lastvideos" ThisKey="matk" OtherKey="matk" Type="lastvideo" />
+      <Association Name="account_thongbao" Member="thongbaos" ThisKey="matk" OtherKey="matk" Type="thongbao" />
+      <Association Name="account_thongbao1" Member="thongbaos1" ThisKey="matk" OtherKey="matk" Type="thongbao" />
+      <Association Name="Admin_account" Member="Admin" ThisKey="MaQL" OtherKey="MaQL" Type="Admin" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Admins" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="MaQL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="chucvuql" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Admin_account" Member="accounts" ThisKey="MaQL" OtherKey="MaQL" Type="account" />
+      <Association Name="Admin_danhmuc" Member="danhmucs" ThisKey="MaQL" OtherKey="MaQL" Type="danhmuc" />
+      <Association Name="Admin_duyetbaidang" Member="duyetbaidangs" ThisKey="MaQL" OtherKey="MaQL" Type="duyetbaidang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.channel" Member="channels">
+    <Type Name="channel">
+      <Column Name="MaDK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenkenh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="thoigiantao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="images" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="channel_dangkykenh" Member="dangkykenhs" ThisKey="MaDK" OtherKey="makenh" Type="dangkykenh" />
+      <Association Name="account_channel" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.comment" Member="comments">
+    <Type Name="comment">
+      <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mavideo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="account_comment" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+      <Association Name="video_comment" Member="video" ThisKey="mavideo" OtherKey="Mavideo" Type="video" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.danhmuc" Member="danhmucs">
+    <Type Name="danhmuc">
+      <Column Name="MaDM" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tendm" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="danhmuc_video" Member="videos" ThisKey="MaDM" OtherKey="categoryid" Type="video" />
+      <Association Name="Admin_danhmuc" Member="Admin" ThisKey="MaQL" OtherKey="MaQL" Type="Admin" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.duyetbaidang" Member="duyetbaidangs">
+    <Type Name="duyetbaidang">
+      <Column Name="Maduyet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="thoigianduyet" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Admin_duyetbaidang" Member="Admin" ThisKey="MaQL" OtherKey="MaQL" Type="Admin" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="MaND" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="imageuser" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="account_User" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.video" Member="videos">
+    <Type Name="video">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="video_comment" Member="comments" ThisKey="Mavideo" OtherKey="mavideo" Type="comment" />
+      <Association Name="video_lastvideo" Member="lastvideos" ThisKey="Mavideo" OtherKey="mavideo" Type="lastvideo" />
+      <Association Name="danhmuc_video" Member="danhmuc" ThisKey="categoryid" OtherKey="MaDM" Type="danhmuc" IsForeignKey="true" />
+      <Association Name="account_video" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.dangkykenh" Member="dangkykenhs">
+    <Type Name="dangkykenh">
+      <Column Name="madk" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="makenh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="matkuser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="channel_dangkykenh" Member="channel" ThisKey="makenh" OtherKey="MaDK" Type="channel" IsForeignKey="true" />
+      <Association Name="account_dangkykenh" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+      <Association Name="account_dangkykenh1" Member="account1" ThisKey="matkuser" OtherKey="matk" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lastvideo" Member="lastvideos">
+    <Type Name="lastvideo">
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maluu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="mavideo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="account_lastvideo" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+      <Association Name="video_lastvideo" Member="video" ThisKey="mavideo" OtherKey="Mavideo" Type="video" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.thongbao" Member="thongbaos">
+    <Type Name="thongbao">
+      <Column Name="MaTB" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="thoigian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="account_thongbao" Member="account" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+      <Association Name="account_thongbao1" Member="account1" ThisKey="matk" OtherKey="matk" Type="account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.binhluan" Method="binhluan">
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <ElementType Name="binhluanResult">
+      <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mavideo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.capnhatthongtinuser" Method="capnhatthongtinuser">
+    <Parameter Name="hoten" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="Char(11)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="imageuser" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createvideo" Method="createvideo">
+    <Parameter Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="nametitle" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="categoryid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="noidung" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dangky" Method="dangky">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="passwords" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="MaQL" Parameter="maQL" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteaccount" Method="deleteaccount">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.detailtaikhoan" Method="detailtaikhoan">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <ElementType Name="detailtaikhoanResult">
+      <Column Name="matk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="passwords" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.detailvideo" Method="detailvideo">
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <ElementType Name="detailvideoResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.laydanhsach" Method="laydanhsach">
+    <ElementType Name="laydanhsachResult">
+      <Column Name="MaND" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="imageuser" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.laydanhsachvideotrangchu" Method="laydanhsachvideotrangchu">
+    <ElementType Name="laydanhsachvideotrangchuResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.laydanhsachvideoUser" Method="laydanhsachvideoUser">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <ElementType Name="laydanhsachvideoUserResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.laytk" Method="laytk">
+    <ElementType Name="laytkResult">
+      <Column Name="matk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="passwords" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.loadvideodetailcategory" Method="loadvideodetailcategory">
+    <Parameter Name="madm" Type="System.Int32" DbType="Int" />
+    <ElementType Name="loadvideodetailcategoryResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaND" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="imageuser" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="matk1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.logins" Method="logins">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="password" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="loginsResult">
+      <Column Name="matk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="passwords" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.nhapbinhluan" Method="nhapbinhluan">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="noidung" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.showvideo" Method="showvideo">
+    <ElementType Name="showvideoResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.taoaccount" Method="taoaccount">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.timkiem" Method="timkiem">
+    <Parameter Name="nametitle" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="timkiemResult">
+      <Column Name="Mavideo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nametitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="matk" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.xoataikoan" Method="xoataikoan">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.taokenh" Method="taokenh">
+    <Parameter Name="tenkenh" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="images" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dangkychannel" Method="dangkychannel">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="matkuser" Type="System.Int32" DbType="Int" />
+    <Parameter Name="makenh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.luuvideoxemsau" Method="luuvideoxemsau">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.xoavideo" Method="xoavideo">
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.suavideo" Method="suavideo">
+    <Parameter Name="mavideo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="filevideo" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="imagetitle" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="nametitle" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="cateid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="noidung" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.suathongtinMyProfile" Method="suathongtinMyProfile">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="hoten" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="imageuser" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.thongbaouser" Method="thongbaouser">
+    <Parameter Name="matk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="noidung" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.taodanhmuc" Method="taodanhmuc">
+    <Parameter Name="tendm" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="MaQL" Parameter="maQL" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SUADANHMUC" Method="SUADANHMUC">
+    <Parameter Name="MADM" Parameter="mADM" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tendm" Type="System.String" DbType="NVarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

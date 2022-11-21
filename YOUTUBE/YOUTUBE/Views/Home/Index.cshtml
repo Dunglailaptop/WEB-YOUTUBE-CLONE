@@ -1,0 +1,20 @@
+﻿@model IEnumerable<YOUTUBE.Models.video>
+
+@{
+    ViewBag.Title = "LOADVIDEO";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <div class="vid-list">
+        <a href="play-video.html"><img src="@item.imagetitle" class="thumbnail"></a>
+        <div class="flex-div">
+            <img src="/Content/img/dung.png">
+            <div class="vid-info">
+                <a href="play-video.html">@item.nametitle</a>
+                <p>Nguyễn Xuân Tiến Dũng</p>
+                <p>15k lượt xem &bull; 8 ngày trước</p>
+            </div>
+        </div>
+    </div>

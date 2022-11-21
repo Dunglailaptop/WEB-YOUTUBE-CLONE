@@ -1,0 +1,94 @@
+﻿@model YOUTUBE.Models.innerjoin
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+
+    .title {
+        color: grey;
+        font-size: 18px;
+    }
+
+    .but {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+        button:hover, a:hover {
+            opacity: 0.7;
+        }
+
+    .profile_1 {
+        display: flex;
+        justify-content: space-between;
+        padding: 24px;
+    }
+
+    .label_profile {
+        margin-right: 12px;
+    }
+</style>
+<h2 style="text-align:center">Edit User Profile</h2>
+@using (@Html.BeginForm("Edit", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="card">
+        <img src="@Model.user.imageuser" alt="John" style="width:100%;border-radius: 50%;">
+        <label>Image</label>
+        <input name="imgfile" class="form-control btn btn-info" id="imgfile" type="file" />
+        <h1>John Doe</h1>
+        <p class="title">CEO & Founder, Example</p>
+        <div class="all">
+            <div class="profile_1">
+                <label class="label_profile">Họ tên:</label>
+                @Html.EditorFor(model => model.user.hoten, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+                @Html.ValidationMessageFor(model => model.user.hoten, "", new { @class = "text-danger" })
+
+                @*<input type="text" />*@
+         
+        <div class="profile_1">
+            <label class="label_profile">Email:</label>
+            @Html.EditorFor(model => model.user.email, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+                @Html.ValidationMessageFor(model => model.user.email, "", new { @class = "text-danger" })
+          
+        <div class="profile_1">
+            <label class="label_profile">địa chỉ:</label>
+            @Html.EditorFor(model => model.user.diachi, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+                @Html.ValidationMessageFor(model => model.user.diachi, "", new { @class = "text-danger" })
+          
+        <div class="profile_1">
+            <label class="label_profile">SDT:</label>
+            @Html.EditorFor(model => model.user.SDT, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+                @Html.ValidationMessageFor(model => model.user.SDT, "", new { @class = "text-danger" })
+            
+        </div>
+
+        @Html.HiddenFor(model=>model.user.matk)
+        <p><button type="submit" class="but">Save</button></p>
+        </div>
+        }

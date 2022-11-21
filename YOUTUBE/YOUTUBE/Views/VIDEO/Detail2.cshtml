@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Detail2";
+    Layout =null;
+}
+<div class="right-sidebar">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="side-video-list">
+            <a href="" class="small-thumbnail"><img src="@item.videoo.imagetitle"></a>
+            <div class="vid-info">
+                <a href=""> @item.videoo.nametitle</a>
+                <p>@item.accountt.username</p>
+                <p>15k lượt xem</p>
+            </div>
+        </div>
+    }
+
+
+
+
+
+
+
+
+</div>
+
+
